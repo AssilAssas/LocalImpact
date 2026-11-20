@@ -4,7 +4,7 @@ set -e
 echo "Attente de PostgreSQL et application des migrations Prisma..."
 MAX_RETRIES=20
 COUNT=0
-until npx prisma migrate deploy; do
+until ./node_modules/.bin/prisma migrate deploy; do
   COUNT=$((COUNT + 1))
   if [ "$COUNT" -ge "$MAX_RETRIES" ]; then
     echo "Impossible de joindre la base de données après $MAX_RETRIES tentatives."

@@ -7,3 +7,4 @@ uploads
 playwright-report
 test-results
 .git
+runner-modules
