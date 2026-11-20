@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 220" width="960" height="220" role="img" aria-label="LocalImpact — Plateforme de signalement et suivi campus">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="60%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#0F292E" />
+    </linearGradient>
+    <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="33%" stop-color="#0EA5E9" />
+      <stop offset="66%" stop-color="#14B8A6" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="960" height="220" rx="16" fill="url(#bgGrad)" />
+  <rect x="1" y="1" width="958" height="218" rx="15" fill="none" stroke="#1E293B" stroke-width="1.5" />
+
+  <!-- Subtle grid dots -->
+  <g fill="#1E293B" opacity="0.6">
+    <circle cx="48" cy="36" r="1.5" />
+    <circle cx="88" cy="36" r="1.5" />
+    <circle cx="128" cy="36" r="1.5" />
+    <circle cx="832" cy="36" r="1.5" />
+    <circle cx="872" cy="36" r="1.5" />
+    <circle cx="912" cy="36" r="1.5" />
+  </g>
+
+  <!-- Title & Subtitle -->
+  <text x="480" y="64" text-anchor="middle" fill="#F8FAFC" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="34" font-weight="700" letter-spacing="-0.5">
+    LocalImpact
+  </text>
+  <text x="480" y="92" text-anchor="middle" fill="#94A3B8" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14" font-weight="400">
+    Plateforme full-stack de signalement et de suivi des incidents sur campus · Next.js 15 · PostgreSQL · Prisma · Zod
+  </text>
+
+  <!-- Animated Workflow Track -->
+  <line x1="170" y1="150" x2="790" y2="150" stroke="#334155" stroke-width="3" stroke-linecap="round" />
+  <line x1="170" y1="150" x2="790" y2="150" stroke="url(#accentLine)" stroke-width="3" stroke-linecap="round" stroke-dasharray="140 620">
+    <animate attributeName="stroke-dashoffset" from="140" to="-620" dur="3.6s" repeatCount="indefinite" />
+  </line>
+
+  <!-- Node 1: NOUVEAU -->
+  <g transform="translate(170, 150)">
+    <circle r="16" fill="#0F172A" stroke="#F59E0B" stroke-width="2.5" />
+    <circle r="6" fill="#F59E0B" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" begin="0s" repeatCount="indefinite" />
+    </circle>
+    <text y="34" text-anchor="middle" fill="#FCD34D" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="600">NOUVEAU</text>
+  </g>
+
+  <!-- Node 2: PRIS_EN_CHARGE -->
+  <g transform="translate(376, 150)">
+    <circle r="16" fill="#0F172A" stroke="#0EA5E9" stroke-width="2.5" />
+    <circle r="6" fill="#0EA5E9" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" begin="0.6s" repeatCount="indefinite" />
+    </circle>
+    <text y="34" text-anchor="middle" fill="#7DD3FC" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="600">PRIS_EN_CHARGE</text>
+  </g>
+
+  <!-- Node 3: EN_COURS -->
+  <g transform="translate(583, 150)">
+    <circle r="16" fill="#0F172A" stroke="#14B8A6" stroke-width="2.5" />
+    <circle r="6" fill="#14B8A6" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" begin="1.2s" repeatCount="indefinite" />
+    </circle>
+    <text y="34" text-anchor="middle" fill="#5EEAD4" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="600">EN_COURS</text>
+  </g>
+
+  <!-- Node 4: RESOLU -->
+  <g transform="translate(790, 150)">
+    <circle r="16" fill="#0F172A" stroke="#10B981" stroke-width="2.5" />
+    <circle r="6" fill="#10B981" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2.4s" begin="1.8s" repeatCount="indefinite" />
+    </circle>
+    <text y="34" text-anchor="middle" fill="#6EE7B7" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="600">RESOLU</text>
+  </g>
+</svg>
