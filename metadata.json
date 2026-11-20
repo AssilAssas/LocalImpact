@@ -1,0 +1,6 @@
+{
+  "name": "LocalImpact",
+  "description": "Plateforme de signalement et de suivi des problèmes sur le campus.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

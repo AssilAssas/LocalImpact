@@ -1,0 +1,113 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  MANAGER
+  ADMIN
+}
+
+enum Category {
+  MATERIEL
+  ACCESSIBILITE
+  ECLAIRAGE
+  PROPRETE
+  INFORMATIQUE
+  AUTRE
+}
+
+enum ReportStatus {
+  NOUVEAU
+  PRIS_EN_CHARGE
+  EN_COURS
+  RESOLU
+}
+
+model User {
+  id             String          @id @default(cuid())
+  email          String          @unique
+  name           String
+  passwordHash   String
+  role           Role            @default(USER)
+  createdAt      DateTime        @default(now())
+  reports        Report[]        @relation("ReportAuthor")
+  assigned       Report[]        @relation("ReportAssignee")
+  supports       Support[]
+  comments       Comment[]
+  statusChanges  StatusHistory[]
+}
+
+model Report {
+  id             String          @id @default(cuid())
+  title          String
+  description    String
+  category       Category
+  location       String
+  photoPath      String?
+  status         ReportStatus    @default(NOUVEAU)
+  resolutionNote String?
+  resolvedAt     DateTime?
+  authorId       String
+  assignedToId   String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  author         User            @relation("ReportAuthor", fields: [authorId], references: [id], onDelete: Cascade)
+  assignedTo     User?           @relation("ReportAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  supports       Support[]
+  comments       Comment[]
+  history        StatusHistory[]
+
+  @@index([status, category])
+  @@index([location])
+  @@index([assignedToId])
+  @@index([createdAt])
+}
+
+model Support {
+  id        String   @id @default(cuid())
+  reportId  String
+  userId    String
+  createdAt DateTime @default(now())
+
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([reportId, userId])
+  @@index([userId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  reportId  String
+  authorId  String
+  createdAt DateTime @default(now())
+
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([reportId, createdAt])
+}
+
+model StatusHistory {
+  id          String        @id @default(cuid())
+  reportId    String
+  fromStatus  ReportStatus?
+  toStatus    ReportStatus
+  note        String?
+  changedById String
+  createdAt   DateTime      @default(now())
+
+  report      Report        @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  changedBy   User          @relation(fields: [changedById], references: [id], onDelete: Cascade)
+
+  @@index([reportId, createdAt])
+}
